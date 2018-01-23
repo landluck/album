@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>album</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">album</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/">全部相册
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#">上传</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">上传</a>
+            </li>
+        </ol>
+        <form action="/admin" method="post" enctype="multipart/form-data">
+            <div class="form-group old">
+                <label for="option">选择文件夹</label>
+                <select name="dir" id="option" class="form-control">
+                    <% for(let i =0;i<dirs.length;i++) {%>
+                        <option>
+                            <%= dirs[i]%>
+                        </option>
+                        <%}%>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-success " id="btn-new">新建文件夹</button>
+                <button type="button" class="btn btn-success " id="btn-old">选择原有文件夹</button>
+            </div>
+            <div class="form-group new">
+                <label for="newdir">新建文件夹名称</label>
+                <input type="text" id="newdir" name="dir">
+            </div>
+            <div class="form-group">
+                <label for="pic">选择图片</label>
+                <input type="file" id="pic" name="picture">
+            </div>
+
+            <button type="submit" class="btn btn-default">提交</button>
+        </form>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        function init() {
+            $('.old').show();
+            $('.new').hide();
+            $('#btn-old').hide()
+            $('#btn-new').show()
+        }
+
+        function newDir() {
+            $('.old').hide();
+            $('.new').show();
+            $('#btn-old').show();
+            $('#btn-new').hide();
+        }
+        init();
+        $('#btn-new').on('click',()=>{
+            newDir()
+        })
+        $('#btn-old').on('click',()=>{
+            init()
+        })
+    </script>
+</body>
+
+</html>
